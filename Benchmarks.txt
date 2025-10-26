@@ -1,0 +1,32 @@
+# Industry Benchmarks and Standards
+
+## Completion Rates
+- Mandatory compliance training: 95-100%
+- Required role-based training: 85-95%
+- Elective professional development: 60-80%
+- Self-paced online training: 40-60%
+
+## Level 1 Scores (1-5 scale)
+- Best-in-class: 4.5+
+- Above average: 4.0-4.4
+- Average: 3.5-3.9
+- Below average: <3.5
+
+## Knowledge Gains
+- Excellent: +25 points or more
+- Good: +15-24 points
+- Acceptable: +10-14 points
+- Needs improvement: <10 points
+
+## Application Rates (30-day)
+- With manager support: 80-90%
+- Without manager support: 60-70%
+- Complex skills (leadership, coaching): 55-65%
+- Simple skills (software, processes): 75-85%
+
+## By Department (Application Rates)
+- Sales: 70-80% (high motivation for skills that drive revenue)
+- Operations: 75-85% (process-driven, immediate application)
+- IT: 65-75% (technical skills, but project-dependent)
+- HR: 70-80% (people skills, regular application)
+- Finance: 70-80% (compliance-driven, regular use)

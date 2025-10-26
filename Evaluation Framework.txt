@@ -1,0 +1,63 @@
+# Evaluation Framework Guide
+
+## Kirkpatrick's Four Levels of Evaluation
+
+### Level 1: Reaction
+**What it measures**: Participant satisfaction and engagement
+**Our metrics**: completion_rate, satisfaction_score, trainer_effectiveness_score, content_relevance_score
+**Target**: Average >4.0 for all reaction metrics
+**Interpretation**: Positive reactions are necessary but not sufficient for learning
+
+### Level 2: Learning
+**What it measures**: Knowledge and skill acquisition
+**Our metrics**: pre_assessment_score, post_assessment_score, knowledge_gain
+**Target**: +15 points minimum gain, 80%+ post-assessment score
+**Interpretation**: Demonstrates training delivered intended learning outcomes
+
+### Level 3: Behavior
+**What it measures**: Application of learning on the job
+**Our metrics**: application_score_30d
+**Target**: 70%+ application rate
+**Interpretation**: The critical measure of training effectiveness
+**Factors influencing**: Manager support, organizational culture, job design, barriers
+
+### Level 4: Results
+**What it measures**: Business impact (productivity, quality, sales, etc.)
+**Our metrics**: Not yet implemented
+**Future**: Will link to departmental KPIs
+
+## Analysis Framework
+
+### When evaluating a program, always consider:
+1. Did participants engage? (Level 1)
+2. Did they learn? (Level 2)
+3. Are they applying it? (Level 3)
+4. What's preventing application? (Barriers)
+5. What can we improve? (Recommendations)
+
+### Common Patterns:
+
+**The "Transfer Gap"**
+- High satisfaction (4.5+)
+- Good learning gains (+20 points)
+- Low application (<65%)
+- **Cause**: Organizational barriers, lack of manager support
+- **Solution**: Manager engagement, job aids, environmental changes
+
+**The "Content Problem"**
+- Low relevance scores (<3.5)
+- Moderate learning gains (+10-15)
+- Low application (<60%)
+- **Cause**: Wrong audience, outdated content
+- **Solution**: Needs analysis, content update, better targeting
+
+**The "Engagement Issue"**
+- Low completion (<70%)
+- Low satisfaction (<3.8)
+- Any level of learning/application
+- **Cause**: Poor delivery, wrong modality, timing issues
+- **Solution**: Trainer coaching, format change, scheduling adjustment
+
+**The "Success Story"**
+- High across all levels (4.0+, +20 points, 75%+)
+- **Action**: Document what worked, replicate approach
