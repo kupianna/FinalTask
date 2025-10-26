@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&D Evaluation Platform - Training Analytics & Insights</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0078D4 0%, #005a9e 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .header-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-content a {
+            color: #333;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-content a:hover {
+            background: #0078D4;
+            color: white;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #0078D4;
+            border-left: 4px solid #0078D4;
+            padding-left: 1rem;
+        }
+
+        /* Chatbot Section */
+        .chatbot-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+        }
+
+        .chatbot-hero {
+            margin-bottom: 2rem;
+        }
+
+        .chatbot-hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .chatbot-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .chatbot-text h3 {
+            color: #0078D4;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .chatbot-text p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .chatbot-placeholder {
+            border: 2px dashed #0078D4;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            background: #f0f7ff;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chatbot-placeholder p {
+            color: #0078D4;
+            font-weight: 600;
+        }
+
+        /* RelevanceAI Chatbot Embed Styles */
+        .relevanceai-embed {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .relevanceai-embed iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Training Tiles Grid */
+        .tiles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tile {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-top: 4px solid #0078D4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+        }
+
+        .tile:hover::before {
+            opacity: 0.15;
+        }
+
+        .tile:nth-child(1)::before {
+            background-image: url('Training1.avif');
+        }
+
+        .tile:nth-child(2)::before {
+            background-image: url('Training2.avif');
+        }
+
+        .tile:nth-child(3)::before {
+            background-image: url('Training3.avif');
+        }
+
+        .tile:nth-child(4)::before {
+            background-image: url('Training1.avif');
+        }
+
+        .tile:nth-child(5)::before {
+            background-image: url('Training2.avif');
+        }
+
+        .tile:nth-child(6)::before {
+            background-image: url('Training3.avif');
+        }
+
+        .tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .tile-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tile h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tile p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tile-metric {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+            position: relative;
+            z-index: 1;
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #0078D4;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #0078D4;
+            margin-top: 0.2rem;
+        }
+
+        .contact-details h4 {
+            margin-bottom: 0.3rem;
+            color: #333;
+        }
+
+        .contact-details p {
+            color: #666;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0078D4;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #0078D4;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #005a9e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,120,212,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-image {
+                max-width: 300px;
+            }
+
+            .chatbot-hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .relevanceai-embed iframe {
+                height: 500px;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tile, .chatbot-container, .contact-container {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="header-grid">
+                <div class="header-text">
+                    <h1>L&D Evaluation Platform</h1>
+                    <p class="tagline">AI-Powered Training Analytics & Continuous Improvement</p>
+                </div>
+                <div class="header-image">
+                    <img src="AI1.avif" alt="AI Analytics" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#chatbot">AI Analyst</a>
+            <a href="#insights">Training Insights</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Chatbot Section -->
+        <section id="chatbot">
+            <h2 class="section-title">AI Evaluation Analyst</h2>
+            <div class="chatbot-container">
+                <div class="chatbot-hero">
+                    <div class="chatbot-hero-content">
+                        <img src="chatbot.avif" alt="AI Chatbot Assistant" class="chatbot-image">
+                        <div class="chatbot-text">
+                            <h3>Your L&D Evaluation Assistant</h3>
+                            <p>Upload your training data and get instant insights, recommendations, and Power BI dashboard specifications. Ask questions about program effectiveness, compare trainings, and discover improvement opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RelevanceAI Chatbot Embed -->
+                <div class="relevanceai-embed">
+                <iframe src="https://app.relevanceai.com/agents/d7b62b/f393c41a-1d26-47c9-98e7-ba60d36799da/0177a435-e3d0-4b9d-8852-ea4ff8e0c51b/embed-chat?hide_tool_steps=false&hide_file_uploads=false&hide_conversation_list=false&bubble_style=agent&primary_color=%23685FFF&bubble_icon=pd%2Fchat&input_placeholder_text=Type+your+message...&hide_logo=false&hide_description=false" width="100%" height="100%" frameborder="0" allow="microphone"></iframe>    
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Insights Tiles -->
+        <section id="insights">
+            <h2 class="section-title">Training Insights & Metrics</h2>
+            
+            <div class="tiles-grid">
+                <!-- Tile 1: Program Effectiveness -->
+                <div class="tile">
+                    <span class="tile-icon">📊</span>
+                    <h3>Program Effectiveness</h3>
+                    <p>Track training impact across all Kirkpatrick levels - from participant reactions to real business results. Identify what's working and what needs improvement.</p>
+                    <div class="tile-metric">
+                        <div class="metric-item">
+                            <span class="metric-value">87%</span>
+                            <span class="metric-label">Avg Completion</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">+22</span>
+                            <span class="metric-label">Knowledge Gain</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">73%</span>
+                            <span class="metric-label">Application Rate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 2: Learning Analytics -->
+                <div class="tile">
+                    <span class="tile-icon">📈</span>
+                    <h3>Learning Analytics</h3>
+                    <p>Measure knowledge acquisition and skill development. Compare pre and post-assessment scores to validate learning outcomes and program design.</p>
+                    <div class="tile-metric">
+                        <div class="metric-item">
+                            <span class="metric-value">4.3/5</span>
+                            <span class="metric-label">Satisfaction</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">4.5/5</span>
+                            <span class="metric-label">Trainer Rating</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">4.2/5</span>
+                            <span class="metric-label">Relevance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 3: Behavior Transfer -->
+                <div class="tile">
+                    <span class="tile-icon">🎯</span>
+                    <h3>Behavior Transfer</h3>
+                    <p>Monitor how learners apply new skills on the job. Identify barriers to application and implement targeted interventions to improve transfer rates.</p>
+                    <div class="tile-metric">
+                        <div class="metric-item">
+                            <span class="metric-value">68%</span>
+                            <span class="metric-label">30-Day Application</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">+15%</span>
+                            <span class="metric-label">With Support</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 4: ROI & Impact -->
+                <div class="tile">
+                    <span class="tile-icon">💼</span>
+                    <h3>ROI & Business Impact</h3>
+                    <p>Demonstrate training value with clear ROI calculations and business impact metrics. Connect learning outcomes to organizational performance.</p>
+                    <div class="tile-metric">
+                        <div class="metric-item">
+                            <span class="metric-value">245</span>
+                            <span class="metric-label">Programs YTD</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">3,200</span>
+                            <span class="metric-label">Learners</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 5: Predictive Insights -->
+                <div class="tile">
+                    <span class="tile-icon">🔮</span>
+                    <h3>Predictive Insights</h3>
+                    <p>Leverage AI to forecast program success, identify at-risk learners early, and receive proactive recommendations for course corrections.</p>
+                    <div class="tile-metric">
+                        <div class="metric-item">
+                            <span class="metric-value">92%</span>
+                            <span class="metric-label">Prediction Accuracy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tile 6: Continuous Improvement -->
+                <div class="tile">
+                    <span class="tile-icon">🔄</span>
+                    <h3>Continuous Improvement</h3>
+                    <p>Access evidence-based intervention recommendations. Track improvement initiatives and measure their impact on training effectiveness.</p>
+                    <div class="tile-metric">
+                        <div class="metric-item">
+                            <span class="metric-value">35+</span>
+                            <span class="metric-label">Interventions</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-value">18%</span>
+                            <span class="metric-label">Avg Improvement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>evaluation@yourcompany.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="contact-icon">🏢</span>
+                            <div class="contact-details">
+                                <h4>Office</h4>
+                                <p>Learning & Development Department<br>
+                                   123 Training Lane, Suite 400<br>
+                                   Budapest, Hungary</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <span class="contact-icon">⏰</span>
+                            <div class="contact-details">
+                                <h4>Support Hours</h4>
+                                <p>Monday - Friday: 9:00 AM - 5:00 PM CET<br>
+                                   Response time: Within 24 hours</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 L&D Evaluation Platform. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Powered by AI | Built for Learning Excellence</p>
+    </footer>
+
+    <script>
+        // Contact Form Handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Here you would typically send the data to your backend
+            console.log('Form submitted:', formData);
+            
+            // Show success message
+            alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Tile interaction
+        document.querySelectorAll('.tile').forEach(tile => {
+            tile.addEventListener('click', function() {
+                // You can add more interaction here
+                // For example, opening a modal with more details
+                console.log('Tile clicked:', this.querySelector('h3').textContent);
+            });
+        });
+    </script>
+</body>
+</html>
